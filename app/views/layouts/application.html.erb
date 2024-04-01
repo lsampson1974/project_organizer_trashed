@@ -17,13 +17,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-    <!-- Show the Welcome Modal box once : -->
     <script>
+
+    //Let's show the about box when we first start up.  
+    //Let's only show the "Log In" box when the user clicks on the Log In link.
     $(document).ready(function(){
         $("#aboutModal").modal('show');
+
+        $("#login").click(function(){
+            $("#loginModal").modal('show');
+        });
+
     });
     </script>
-    <!-- End of Show the Welcome Modal box once : -->
 
 
     <%= csrf_meta_tags %>
@@ -36,19 +42,28 @@
 
   <body>
 
-  <!-- Navigation menu -->
+  <% @login_box_show = "noShow" %>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <!-- Let's render our navigation menu -->
+  
+
+  <nav class="navbar navbar-dark bg-info">
       <div class="container-fluid">
    
-        <a class="navbar-brand" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+        <a class="navbar-brand text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+        <a class="navbar-brand text-white my-2 my-lg-0" id="login" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</a>
+
       </div>
 </nav>
 
-  <!-- Show the welcome box -->
+  <!-- Here's where our "About" box is partially rendered -->
     <%= render partial: "misc/about" %>
-  <!-- End of show the welcome box -->
+  <!-- End of render the about box -->
 
+
+  <!-- Here's where our "Log In" box is partially rendered -->
+    <%= render partial: "misc/login" %>
+  <!-- End of render the login box -->
 
     <%= yield %>
   </body>
